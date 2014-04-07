@@ -1,0 +1,22 @@
+{
+  "name": "sprite-styl",
+  "version": "0.0.1",
+  "description": "sprite.styl",
+  "main": "lib/index",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tommy351/sprite.styl.git"
+  },
+  "keywords": [
+    "stylus",
+    "style",
+    "css",
+    "sprite"
+  ],
+  "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
+  "dependencies": {
+    "lodash": "2.4.1",
+    "image-size": "0.2.3",
+    "canvas": "1.1.3"
+  }
+}
