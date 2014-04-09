@@ -1,0 +1,5 @@
+sprite(map, name, offset-x = 0, offset-y = 0)
+  if map is a 'spritemap'
+    background: sprite-url(map) sprite-position(map, name, offset-x, offset-y) no-repeat
+  else
+    error('expected "map" to be a spritemap')
