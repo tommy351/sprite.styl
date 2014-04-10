@@ -1,5 +1,15 @@
-sprite(map, name, offset-x = 0, offset-y = 0)
-  if map is a 'spritemap'
-    background: sprite-url(map) sprite-position(map, name, offset-x, offset-y) no-repeat
-  else
-    error('expected "map" to be a spritemap')
+sprite(map, name, dimensions = false, offset-x = 0, offset-y = 0)
+  background: sprite-url(map) sprite-position(map, name, offset-x, offset-y) no-repeat
+
+  if dimensions
+    sprite-dimensions(map, name)
+
+sprite-background-position(map, name, offset-x = 0, offset-y = 0)
+  background-position: sprite-position(map, name, offset-x, offset-y)
+
+sprite-dimensions(map, name)
+  file = sprite-file(map, name)
+
+  if file
+    width: image-width(file)
+    height: image-height(file)
