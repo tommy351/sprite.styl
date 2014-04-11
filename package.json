@@ -31,9 +31,9 @@
     "stylus": "0.43.1"
   },
   "devDependencies": {
-    "mocha": "^1.18.2",
-    "chai": "^1.9.1",
-    "async": "^0.7.0",
-    "handlebars": "^2.0.0-alpha.2"
+    "mocha": "*",
+    "chai": "*",
+    "async": "*",
+    "handlebars": "*"
   }
 }
