@@ -1,0 +1,24 @@
+sprites = sprite-map("icons/*.png", diagonal)
+
+.foo
+  background: sprite-url(sprites)
+
+.add-to-desktop
+  sprite(sprites, add-to-desktop)
+  background-position: sprite-position(sprites, add-to-desktop)
+
+.cards-club
+  sprite(sprites, cards-club)
+  background-position: sprite-position(sprites, cards-club)
+
+.cards-diamond
+  sprite(sprites, cards-diamond)
+  background-position: sprite-position(sprites, cards-diamond)
+
+.cards-heart
+  sprite(sprites, cards-heart)
+  background-position: sprite-position(sprites, cards-heart)
+
+.cards-spade
+  sprite(sprites, cards-spade)
+  background-position: sprite-position(sprites, cards-spade)
