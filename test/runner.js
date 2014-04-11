@@ -110,7 +110,7 @@ describe('sprites', function(){
         compare: ['render', 'id', 'css', function(next, results){
           var css = handlebars.compile(results.css)({id: results.id});
 
-          css.should.eql(results.render);
+          results.render.should.eql(css);
           next();
         }],
         img: ['id', function(next, results){
@@ -128,12 +128,28 @@ describe('sprites', function(){
   });
 
   after(function(done){
-    glob(pathFn.join(imagePath, 'icons-*.png'), function(err, files){
-      if (err) throw err;
+    var cacheDir = pathFn.join(__dirname, '.stylus_cache');
 
-      async.each(files, function(file, next){
-        fs.unlink(file, next);
-      }, done);
-    });
+    async.auto({
+      sprites: function(next){
+        glob(pathFn.join(imagePath, 'icons-*.png'), next);
+      },
+      removeSprites: ['sprites', function(next, results){
+        async.each(results.sprites, function(file, next){
+          fs.unlink(file, next);
+        }, next);
+      }],
+      cache: function(next){
+        fs.readdir(cacheDir, next);
+      },
+      removeCache: ['cache', function(next, results){
+        async.each(results.cache, function(file, next){
+          fs.unlink(pathFn.join(cacheDir, file), next);
+        }, next);
+      }],
+      removeCacheDir: ['removeCache', function(next){
+        fs.rmdir(cacheDir, next);
+      }]
+    }, done);
   });
 });

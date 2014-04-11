@@ -70,6 +70,16 @@ Returns the position of an image in a sprite.
 
 ### sprite-file(map, name)
 
+Returns a file object in a sprite. A file object contains
+
+- **path**: Relative path of an image
+- **x**: Horizontal position of an image in a sprite
+- **y**: Vertical position of an image in a sprite
+- **width**: Image width
+- **height**: Image height
+
+### sprite-file-path(map, name)
+
 Returns the original path of an image in a sprite.
 
 ### image-width(path)
