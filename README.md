@@ -13,17 +13,19 @@ sprite.styl uses [node-canvas] to generate images. You have to install [Cairo] o
 ### Installation
 
 ``` bash
-$ npm install sprite-styl
+$ npm install sprite.styl
 ```
 
-### In JavaScript
+### Usage
+
+#### JavaScript
 
 First, import sprite.styl to Stylus.
 
 ``` js
 var stylus = require('stylus'),
-    sprite = require('sprite-styl');
-    
+    sprite = require('sprite.styl');
+
 var style = stylus(str).use(sprite(options));
 ```
 
@@ -37,13 +39,19 @@ Option | Description | Default
 `layout` | Sprite layout (vertical, horizontal or diagonal) | `vertical`
 `spacing` | Spacing between images in sprites | `0`
 
-### In Stylus
+#### Stylus
 
 ``` stylus
 icons = sprite-map("icons/*.png")
 
 .cards-club
     sprite(icons, cards-club)
+```
+
+### Clean Cache
+
+``` bash
+$ rm -rf .stylus_cache
 ```
 
 ## API

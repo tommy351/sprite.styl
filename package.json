@@ -1,7 +1,7 @@
 {
-  "name": "sprite-styl",
+  "name": "sprite.styl",
   "version": "0.0.1",
-  "description": "sprite.styl",
+  "description": "Stylus mixins for generating image sprites.",
   "main": "lib/index",
   "repository": {
     "type": "git",
