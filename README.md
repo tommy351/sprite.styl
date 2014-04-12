@@ -1,6 +1,6 @@
 # sprite.styl
 
-[![Build Status](https://travis-ci.org/tommy351/sprite.styl.png?branch=master)](https://travis-ci.org/tommy351/sprite.styl)
+[![Build Status](https://travis-ci.org/tommy351/sprite.styl.svg?branch=master)](https://travis-ci.org/tommy351/sprite.styl) [![NPM version](https://badge.fury.io/js/sprite.styl.svg)](http://badge.fury.io/js/sprite.styl)
 
 Stylus mixins for generating image sprites.
 
@@ -94,6 +94,14 @@ Returns the height of an image.
 
 Returns the image URL.
 
+### retina-file-path(path)
+
+Returns the file path trailing with `@2x`. For example:
+
+```
+retina-file-path("icons/foo.png") => "icons/foo@2x.png"
+```
+
 ### sprite(map, name, [dimensions=false], [offset-x=0], [offset-y=0])
 
 Generates `background` property for an element. For example:
@@ -145,6 +153,53 @@ yields:
     height: 32px;
 }
 ```
+
+### retina-background(bg, [bg2x])
+
+Sets `background` property for retina images. If `bg2x` is not defined, it will be `bg@2x.png`. For example:
+
+``` stylus
+.foo
+  retina-background("icons/foo.png")
+
+.bar
+  retina-background("icons/bar.png", "icons-2x/bar.png")
+```
+
+yields:
+
+``` css
+.foo {
+  background-image: url("/images/icons/foo.png");
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .foo {
+    background-image: url("/images/icons/foo@2x.png");
+    background-size: 50% auto;
+  }
+}
+.bar {
+  background-image: url("/images/icons/bar.png");
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .bar {
+    background-image: url("/images/icons-2x/bar.png");
+    background-size: 50% auto;
+  }
+}
+```
+
+## License
+
+(The MIT License)
+
+Copyright (c) 2014 Tommy Chen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [node-canvas]: https://github.com/LearnBoost/node-canvas
 [Cairo]: http://cairographics.org/
