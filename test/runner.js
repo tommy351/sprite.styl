@@ -71,7 +71,8 @@ describe('integration', function(){
 describe('sprites', function(){
   var spritePath = pathFn.join(__dirname, 'sprites'),
     imagePath = pathFn.join(__dirname, 'images'),
-    cases = findCases(spritePath),
+    layout = ['diagonal', 'horizontal', 'vertical'],
+    cases = _.difference(findCases(spritePath), layout),
     files = [];
 
   before(function(done){
@@ -83,7 +84,7 @@ describe('sprites', function(){
     });
   });
 
-  cases.forEach(function(test){
+  ['diagonal', 'horizontal', 'vertical'].forEach(function(test){
     it(test, function(done){
       var path = pathFn.join(spritePath, test);
 
@@ -124,6 +125,12 @@ describe('sprites', function(){
           next();
         }]
       }, done);
+    });
+  });
+
+  cases.forEach(function(test){
+    it(test, function(done){
+      compareStyl(pathFn.join(spritePath, test), done);
     });
   });
 

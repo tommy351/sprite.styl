@@ -1,0 +1,18 @@
+.foo {
+  background-image: url("/images/icons/foo.png");
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .foo {
+    background-image: url("/images/icons/foo@2x.png");
+    background-size: 50% auto;
+  }
+}
+.bar {
+  background-image: url("/images/icons/bar.png");
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .bar {
+    background-image: url("/images/icons-2x/bar.png");
+    background-size: 50% auto;
+  }
+}
