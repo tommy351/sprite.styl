@@ -1,6 +1,6 @@
 {
   "name": "sprite.styl",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stylus mixins for generating image sprites.",
   "main": "lib/index",
   "repository": {
