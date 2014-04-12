@@ -48,6 +48,24 @@ icons = sprite-map("icons/*.png")
     sprite(icons, cards-club)
 ```
 
+### Retina Sprites
+
+If normal and retina images are in the same folder:
+
+``` stylus
+icons = retina-sprite-map("icons/*.png")
+// icons[0] = sprite-map("icons/!(*@2x).png")
+// icons[1] = sprite-map("icons/*@2x.png")
+```
+
+If normal and retina images are separated:
+
+``` stylus
+icons = retina-sprite-map("icons/*.png", "icons-2x/*.png")
+// icons[0] = sprite-map("icons/*.png")
+// icons[1] = sprite-map("icons-2x/*.png")
+```
+
 ### Clean Cache
 
 ``` bash
@@ -94,13 +112,18 @@ Returns the height of an image.
 
 Returns the image URL.
 
-### retina-file-path(path)
+### retina-file-path(path, [modifier=@2x])
 
-Returns the file path trailing with `@2x`. For example:
+Returns the file path trailing with `modifier`. For example:
 
 ```
 retina-file-path("icons/foo.png") => "icons/foo@2x.png"
+retina-file-path("icons/bar.png", "-2x") => "icons/bar-2x.png"
 ```
+
+### retina-sprite-map(path, [path2x], [layout=vertical], [spacing=0])
+
+Generates an array of sprite maps. The first map is for normal display and the second one is for retina display. If `path2x` is not defined, it will be `path@2x.png`.
 
 ### sprite(map, name, [dimensions=false], [offset-x=0], [offset-y=0])
 

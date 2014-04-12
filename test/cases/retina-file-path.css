@@ -1,3 +1,6 @@
 .foo {
   path: 'icons/foo@2x.png';
 }
+.bar {
+  path: 'icons/bar-2x.png';
+}

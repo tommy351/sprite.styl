@@ -9,6 +9,15 @@ var stylus = require('stylus'),
   crypto = require('crypto'),
   should = require('chai').should();
 
+var casePath = pathFn.join(__dirname, 'cases'),
+  spritePath = pathFn.join(__dirname, 'sprites'),
+  imagePath = pathFn.join(__dirname, 'images'),
+  cachePath = pathFn.join(__dirname, '.stylus_cache');
+
+var md5 = function(str){
+  return crypto.createHash('md5').update(str).digest('hex');
+};
+
 var findCases = function(path){
   return fs.readdirSync(path).filter(function(file){
     return pathFn.extname(file) === '.styl';
@@ -57,9 +66,27 @@ var checksum = function(path, callback){
   }).on('error', callback);
 };
 
+var getSpriteId = function(path, callback){
+  fs.readFile(pathFn.join(cachePath, md5(path)), 'utf8', function(err, content){
+    if (err) return callback(err);
+
+    var obj = JSON.parse(content);
+
+    callback(null, obj.id);
+  });
+};
+
+var compareImage = function(a, b, callback){
+  async.map([a, b], checksum, function(err, results){
+    if (err) return callback(err);
+
+    results[0].should.eql(results[1]);
+    callback();
+  });
+};
+
 describe('integration', function(){
-  var casePath = pathFn.join(__dirname, 'cases'),
-    cases = findCases(casePath);
+  var cases = findCases(casePath);
 
   cases.forEach(function(test){
     it(test, function(done){
@@ -69,22 +96,19 @@ describe('integration', function(){
 });
 
 describe('sprites', function(){
-  var spritePath = pathFn.join(__dirname, 'sprites'),
-    imagePath = pathFn.join(__dirname, 'images'),
-    layout = ['diagonal', 'horizontal', 'vertical'],
-    cases = _.difference(findCases(spritePath), layout),
-    files = [];
+  var layout = ['diagonal', 'horizontal', 'vertical'],
+    cases = _.difference(findCases(spritePath), layout, ['retina-sprite']);
 
   before(function(done){
     fs.readdir(imagePath, function(err, list){
       if (err) throw err;
 
-      files = list;
+      imageFiles = list;
       done();
     });
   });
 
-  ['diagonal', 'horizontal', 'vertical'].forEach(function(test){
+  layout.forEach(function(test){
     it(test, function(done){
       var path = pathFn.join(spritePath, test);
 
@@ -96,36 +120,56 @@ describe('sprites', function(){
           renderStyl(path + '.styl', results.styl, next);
         }],
         id: ['render', function(next){
-          fs.readdir(imagePath, function(err, list){
-            if (err) return next(err);
-
-            var id = _.difference(list, files)[0].replace('.png', '');
-            files = list;
-
-            next(null, id);
-          });
+          getSpriteId('icons/*.png', next);
         }],
         css: function(next){
           fs.readFile(path + '.css', 'utf8', next);
         },
         compare: ['render', 'id', 'css', function(next, results){
-          var css = handlebars.compile(results.css)({id: results.id});
+          var css = handlebars.compile(results.css)(results);
 
           results.render.should.eql(css);
           next();
         }],
         img: ['id', function(next, results){
-          checksum(pathFn.join(imagePath, results.id + '.png'), next);
-        }],
-        sprite: function(next){
-          checksum(path + '.png', next);
-        },
-        checksum: ['img', 'sprite', function(next, results){
-          results.img.should.eql(results.sprite);
-          next();
+          compareImage(pathFn.join(imagePath, results.id + '.png'), path + '.png', next);
         }]
       }, done);
     });
+  });
+
+  it('retina-sprite', function(done){
+    var path = pathFn.join(spritePath, 'retina-sprite');
+
+    async.auto({
+      styl: function(next){
+        fs.readFile(path + '.styl', 'utf8', next);
+      },
+      render: ['styl', function(next, results){
+        renderStyl(path + '.styl', results.styl, next);
+      }],
+      id: ['render', function(next){
+        getSpriteId('retina/!(*@2x).png', next);
+      }],
+      id2x: ['render', function(next){
+        getSpriteId('retina/*@2x.png', next);
+      }],
+      css: function(next){
+        fs.readFile(path + '.css', 'utf8', next);
+      },
+      compare: ['render', 'id', 'id2x', 'css', function(next, results){
+        var css = handlebars.compile(results.css)(results);
+
+        results.render.should.eql(css);
+        next();
+      }],
+      img: ['id', function(next, results){
+        compareImage(pathFn.join(imagePath, results.id + '.png'), path + '.png', next);
+      }],
+      img2x: ['id2x', function(next, results){
+        compareImage(pathFn.join(imagePath, results.id2x + '.png'), path + '@2x.png', next);
+      }]
+    }, done);
   });
 
   cases.forEach(function(test){
@@ -135,11 +179,9 @@ describe('sprites', function(){
   });
 
   after(function(done){
-    var cacheDir = pathFn.join(__dirname, '.stylus_cache');
-
     async.auto({
       sprites: function(next){
-        glob(pathFn.join(imagePath, 'icons-*.png'), next);
+        glob(pathFn.join(imagePath, '*.png'), next);
       },
       removeSprites: ['sprites', function(next, results){
         async.each(results.sprites, function(file, next){
@@ -147,15 +189,15 @@ describe('sprites', function(){
         }, next);
       }],
       cache: function(next){
-        fs.readdir(cacheDir, next);
+        fs.readdir(cachePath, next);
       },
       removeCache: ['cache', function(next, results){
         async.each(results.cache, function(file, next){
-          fs.unlink(pathFn.join(cacheDir, file), next);
+          fs.unlink(pathFn.join(cachePath, file), next);
         }, next);
       }],
       removeCacheDir: ['removeCache', function(next){
-        fs.rmdir(cacheDir, next);
+        fs.rmdir(cachePath, next);
       }]
     }, done);
   });

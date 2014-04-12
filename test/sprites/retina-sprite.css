@@ -1,0 +1,75 @@
+.add-to-desktop {
+  background: url("/images/{{ id }}.png") 0px 0px no-repeat;
+  background-position: 0px 0px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .add-to-desktop {
+    background: url("/images/{{ id2x }}.png") 0px 0px no-repeat;
+    background-size: 50% auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .add-to-desktop {
+    background: url("/images/{{ id2x }}.png") 0px 0px no-repeat;
+  }
+}
+.cards-club {
+  background: url("/images/{{ id }}.png") 0px -128px no-repeat;
+  background-position: 0px -128px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-club {
+    background: url("/images/{{ id2x }}.png") 0px -256px no-repeat;
+    background-size: 50% auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-club {
+    background: url("/images/{{ id2x }}.png") 0px -256px no-repeat;
+  }
+}
+.cards-diamond {
+  background: url("/images/{{ id }}.png") 0px -160px no-repeat;
+  background-position: 0px -160px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-diamond {
+    background: url("/images/{{ id2x }}.png") 0px -320px no-repeat;
+    background-size: 50% auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-diamond {
+    background: url("/images/{{ id2x }}.png") 0px -320px no-repeat;
+  }
+}
+.cards-heart {
+  background: url("/images/{{ id }}.png") 0px -192px no-repeat;
+  background-position: 0px -192px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-heart {
+    background: url("/images/{{ id2x }}.png") 0px -384px no-repeat;
+    background-size: 50% auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-heart {
+    background: url("/images/{{ id2x }}.png") 0px -384px no-repeat;
+  }
+}
+.cards-spade {
+  background: url("/images/{{ id }}.png") 0px -224px no-repeat;
+  background-position: 0px -224px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-spade {
+    background: url("/images/{{ id2x }}.png") 0px -448px no-repeat;
+    background-size: 50% auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  .cards-spade {
+    background: url("/images/{{ id2x }}.png") 0px -448px no-repeat;
+  }
+}

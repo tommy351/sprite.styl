@@ -1,0 +1,39 @@
+_mq-retina = "(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)"
+
+sprite(map, name, dimensions = false, offset-x = 0, offset-y = 0)
+  if length(map) > 1
+    sprite(map[0], name, dimensions, offset-x, offset-y)
+
+    @media _mq-retina
+      sprite(map[1], name, dimensions, offset-x * 2, offset-y * 2)
+      background-size: 50% auto
+  else
+    background: sprite-url(map) sprite-position(map, name, offset-x, offset-y) no-repeat
+
+    if dimensions
+      sprite-dimensions(map, name)
+
+sprite-background-position(map, name, offset-x = 0, offset-y = 0)
+  if length(map) > 1
+    sprite-background-position(map[0], name, offset-x, offset-y)
+
+    @media _mq-retina
+      sprite(map[1], name, offset-x * 2, offset-y * 2)
+  else
+    background-position: sprite-position(map, name, offset-x, offset-y)
+
+sprite-dimensions(map, name)
+  file = sprite-file(map, name)
+
+  if file
+    width: file.width
+    height: file.height
+  else
+    error('File "' + -string(name) + '" not found')
+
+retina-background(bg, bg2x = retina-file-path(bg))
+  background-image: image-url(bg)
+
+  @media _mq-retina
+    background-image: image-url(bg2x)
+    background-size: 50% auto
