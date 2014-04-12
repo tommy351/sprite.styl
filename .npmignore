@@ -1,2 +1,5 @@
-.git*
+.gitignore
+.gitmodules
 .DS_Store
+.travis.yml
+test/
