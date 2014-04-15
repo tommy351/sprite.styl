@@ -1,0 +1,23 @@
+.foo {
+  background: url("/images/{{ id }}.png");
+}
+.add-to-desktop {
+  background: url("/images/{{ id }}.png") 0px 0px no-repeat;
+  background-position: 0px 0px;
+}
+.cards-club {
+  background: url("/images/{{ id }}.png") -96px -128px no-repeat;
+  background-position: -96px -128px;
+}
+.cards-diamond {
+  background: url("/images/{{ id }}.png") -96px -160px no-repeat;
+  background-position: -96px -160px;
+}
+.cards-heart {
+  background: url("/images/{{ id }}.png") -96px -192px no-repeat;
+  background-position: -96px -192px;
+}
+.cards-spade {
+  background: url("/images/{{ id }}.png") -96px -224px no-repeat;
+  background-position: -96px -224px;
+}
