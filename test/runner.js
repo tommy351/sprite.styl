@@ -11,6 +11,7 @@ var stylus = require('stylus'),
 
 var casePath = pathFn.join(__dirname, 'cases'),
   spritePath = pathFn.join(__dirname, 'sprites'),
+  algorithmPath = pathFn.join(__dirname, 'algorithms'),
   imagePath = pathFn.join(__dirname, 'images'),
   cachePath = pathFn.join(__dirname, '.stylus_cache');
 
@@ -96,8 +97,8 @@ describe('integration', function(){
 });
 
 describe('sprites', function(){
-  var layout = ['diagonal', 'horizontal', 'vertical'],
-    cases = _.difference(findCases(spritePath), layout, ['retina-sprite']);
+  var cases = _.difference(findCases(spritePath), ['retina-sprite']),
+    algorithms = findCases(algorithmPath);
 
   before(function(done){
     fs.readdir(imagePath, function(err, list){
@@ -108,9 +109,9 @@ describe('sprites', function(){
     });
   });
 
-  layout.forEach(function(test){
+  algorithms.forEach(function(test){
     it(test, function(done){
-      var path = pathFn.join(spritePath, test);
+      var path = pathFn.join(algorithmPath, test);
 
       async.auto({
         styl: function(next){
