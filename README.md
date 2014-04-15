@@ -36,7 +36,7 @@ Option | Description | Default
 `cache_dir` | Cache directory | `.stylus_cache`
 `base_url` | Base URL | `/`
 `image_url` | Image URL | `images`
-`layout` | Sprite layout (See [algorithms](#algorithms)) | `vertical`
+`layout` | Sprite layout (See [layouts](#layouts)) | `vertical`
 `spacing` | Spacing between images in sprites | `0`
 
 #### Stylus
@@ -72,27 +72,37 @@ icons = retina-sprite-map("icons/*.png", "icons-2x/*.png")
 $ rm -rf .stylus_cache
 ```
 
-## Algorithms
+## Layouts
 
-- **vertical**: Allocates images vertically.
+#### vertical
 
-    ![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/vertical.png)
+Allocates images vertically.
+
+![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/vertical.png)
     
-- **vertical-right**: Allocates images vertically aligning to the right of the sprite.
+#### vertical-right
+ 
+Allocates images vertically aligning to the right of the sprite.
 
-    ![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/vertical-right.png)
+![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/vertical-right.png)
 
-- **horizontal**: Allocates images horizontally.
+#### horizontal
 
-    ![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/horizontal.png)
+Allocates images horizontally.
+
+![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/horizontal.png)
     
-- **horizontal-bottom**: Allocates images horizontally aligning to the bottom of the sprite.
+#### horizontal-bottom
 
-    ![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/horizontal-bottom.png)
+Allocates images horizontally aligning to the bottom of the sprite.
 
-- **diagonal**: Allocates images diagonally.
+![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/horizontal-bottom.png)
 
-    ![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/diagonal.png)
+#### diagonal
+
+Allocates images diagonally.
+
+![](https://raw.githubusercontent.com/tommy351/sprite.styl/master/test/algorithms/diagonal.png)
 
 ## API
 
